@@ -1,0 +1,13 @@
+<resources>
+        <string name="app_name">SteamInterviewApp</string>
+        <string name="facebook_app_id">1920315494899940</string>
+        <string name="fb_login_protocol_scheme">fb1920315494899940</string>
+        <string name="url_length"></string>
+        <string name="id_1">271590</string>
+        <string name="id_2">570</string>
+        <string name="id_3">252950</string>
+        <string name="id_4">476600</string>
+        <string name="id_5">306130</string>
+        <string name="id_6">578080</string>
+        <string name="id_7">518790</string>
+</resources>
