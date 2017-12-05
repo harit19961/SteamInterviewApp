@@ -6,9 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
+
 import java.util.List;
 
 /**
@@ -61,7 +59,6 @@ public class CatalogScreen extends Activity implements IcallbackListener, CallBa
         getDataFromServer = new GetDataFromServer();
         button2CLicked();
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
@@ -89,7 +86,7 @@ public class CatalogScreen extends Activity implements IcallbackListener, CallBa
             for(int i=0;i<integerList.size();i++)
                 listGameDetails.get(i).setNo_of_players(integerList.get(i));
         }catch (Exception e){
-//            Log.d("Final Eroor","Cast Exception on CatalogScreen onResult"+e);
+
         }
         cardViewAdapter = new CardViewAdapter(listGameDetails);
         recyclerView.setAdapter(cardViewAdapter);
@@ -109,12 +106,10 @@ public class CatalogScreen extends Activity implements IcallbackListener, CallBa
     @Override
     public void callBackForPlayer(Object resultPlayersList) {
         integerList= (List<Integer>) resultPlayersList;
-        Log.d("Final error","reach1");
-        if(getDataFromServer.getStatus() == AsyncTask.Status.FINISHED){
+        if(loadingDialog.isShowing()){}else{
             for(int i=0;i<integerList.size();i++){
                 listGameDetails.get(i).setNo_of_players(integerList.get(i));}
-            cardViewAdapter.notifyDataSetChanged();}else{
-            Log.d("Final error","reach");
+            cardViewAdapter.notifyDataSetChanged();}
+
         }
-    }
 }

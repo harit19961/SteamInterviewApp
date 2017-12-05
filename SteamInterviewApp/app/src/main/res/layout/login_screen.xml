@@ -4,11 +4,10 @@
     android:background="@color/com_facebook_blue">
 
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/fbuser_login_button"
-        android:layout_width="match_parent"
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 </RelativeLayout>

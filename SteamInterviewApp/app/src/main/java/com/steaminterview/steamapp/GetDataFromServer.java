@@ -50,15 +50,6 @@ public class GetDataFromServer extends AsyncTask<String, String, Object> impleme
                 }
                 while (jParser.nextToken() != JsonToken.END_OBJECT) {
                     String fieldname = jParser.getCurrentName();
-                    if(fieldname.equals("values")) {
-                        jParser.nextToken();int no_of_players=0;
-                        while (jParser.nextToken() != JsonToken.END_ARRAY) {
-                            no_of_players = jParser.getIntValue();
-                            jParser.nextToken();
-                        }
-                        gameDetailsWC.setNo_of_players(no_of_players);
-                        System.out.println("Values_Twitch");
-                    }
                     if(fieldname.equals("name")) {
                         jParser.nextToken();
                         System.out.println("Name:"+jParser.getText());
@@ -81,12 +72,10 @@ public class GetDataFromServer extends AsyncTask<String, String, Object> impleme
                     }
                     else if ("short_description".equals(fieldname)) {
                         jParser.nextToken();
-                        System.out.println("Description:"+jParser.getText());
                         gameDetailsWC.setDescription(jParser.getText());
                     }
                     else if ("is_free".equals(fieldname)) {
                         jParser.nextToken();
-                        System.out.println("Is_free:"+jParser.getText());
                         gameDetailsWC.setIs_free(jParser.getBooleanValue());
                     }
                     else if(fieldname.equals("screenshots")) {
@@ -96,7 +85,6 @@ public class GetDataFromServer extends AsyncTask<String, String, Object> impleme
                             while (jParser.nextToken() != JsonToken.END_OBJECT) {
                                 if(jParser.getCurrentName().equals("path_thumbnail")&&count<5) {
                                     jParser.nextToken();
-                                    System.out.println("Screenshots:"+jParser.getText());
                                     screenshots[i][count]=jParser.getText();count++;
                                 }
                                 else {
@@ -114,37 +102,6 @@ public class GetDataFromServer extends AsyncTask<String, String, Object> impleme
 
                 listGameDetail.add(i, gameDetailsWC);
             }
-//            for (int i = n; i < requestURL.length; i++) {
-//                URL url = new URL(requestURL[i]);
-//                boolean flag=false;
-//                JsonFactory jfactory = new JsonFactory();
-//                JsonParser jParser = jfactory.createParser(url.openStream());
-//                jParser.nextToken();
-//                while (jParser.nextToken() != JsonToken.END_OBJECT&&(flag==false)) {
-//                    if(jParser.getCurrentName().equals("data")) {
-//                        flag=true;
-//                    }else {
-//                        jParser.nextToken();
-//                    }
-//                }
-//                while (jParser.nextToken() != JsonToken.END_OBJECT) {
-//                    String fieldname = jParser.getCurrentName();
-//                    int no_of_players = 0;
-//                    if (fieldname.equals("values")) {
-//                        jParser.nextToken();
-//
-//                        while (jParser.nextToken() != JsonToken.END_ARRAY) {
-//                            no_of_players = jParser.getIntValue();
-//                            jParser.nextToken();
-//                        }
-//                    }
-//                     else
-//                    {
-//                            jParser.skipChildren();
-//                    }
-//                    listGameDetail.get(i-n).setNo_of_players(no_of_players);
-//                }jParser.close();
-//            }
         } catch (Exception e) {
             Log.d("Hari", e.toString());
         }
