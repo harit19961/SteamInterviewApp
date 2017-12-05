@@ -58,7 +58,6 @@ public class CatalogScreen extends Activity implements IcallbackListener, CallBa
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        Log.d("CatalogScreen","Enters screen 2");
         getDataFromServer = new GetDataFromServer();
         button2CLicked();
         recyclerView.setHasFixedSize(true);
@@ -89,30 +88,33 @@ public class CatalogScreen extends Activity implements IcallbackListener, CallBa
             listGameDetails= (List<GameDetailsWC>) listGameDetailObject;
             for(int i=0;i<integerList.size();i++)
                 listGameDetails.get(i).setNo_of_players(integerList.get(i));
-            cardViewAdapter = new CardViewAdapter(listGameDetails);
-            recyclerView.setAdapter(cardViewAdapter);
         }catch (Exception e){
-//            debugLog("Cast Exception on CatalogScreen onResult"+e);
+//            Log.d("Final Eroor","Cast Exception on CatalogScreen onResult"+e);
         }
+        cardViewAdapter = new CardViewAdapter(listGameDetails);
+        recyclerView.setAdapter(cardViewAdapter);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        debugLog("onStartReach Test1");
         getDataFromSecoundApi = new GetDataFromSecoundApi();
         getDataFromSecoundApi.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,url8,url9,url10,url11,url12,url13,url14);
         getDataFromSecoundApi.setCallBackForPlayers(this);
 
     }
 
+
     @Override
     public void callBackForPlayer(Object resultPlayersList) {
         integerList= (List<Integer>) resultPlayersList;
-        if(loadingDialog.isShowing()){}else{
-            for(int i=0;i<integerList.size();i++)
-                listGameDetails.get(i).setNo_of_players(integerList.get(i));
-            cardViewAdapter.notifyDataSetChanged();}
+        Log.d("Final error","reach1");
+        if(getDataFromServer.getStatus() == AsyncTask.Status.FINISHED){
+            for(int i=0;i<integerList.size();i++){
+                listGameDetails.get(i).setNo_of_players(integerList.get(i));}
+            cardViewAdapter.notifyDataSetChanged();}else{
+            Log.d("Final error","reach");
+        }
     }
 }
