@@ -41,9 +41,9 @@ public class LoginScreen extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(context,"Login Success",Toast.LENGTH_LONG).show();
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
+//                Intent intent = getIntent();
+//                finish();
+//                startActivity(intent);
             }
 
 
